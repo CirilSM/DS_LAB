@@ -1,0 +1,89 @@
+//polynomial addition
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int c;
+	int exp;
+	struct node* next;
+};
+struct node* t,temp,result;
+struct node* polyadd(struct node*tmp,struct node*w,int s1,int s2)
+{
+	if(s1>s2||s1==s2)
+	{
+		struct node* q;
+		q=w->next;
+		while(tmp->next!=NULL)
+		{
+			if(tmp->exp==w->exp)
+			{
+				w->c+=tmp->c;//added to second list;
+			}
+			if(w->next==NULL)
+			{
+				tmp=tmp->next;//if check of one exp is over then next terms is checked
+				w=q;//the second expresion is pointed again to 1st term
+			}
+			else
+				w=w->next;
+		}
+	return w;
+	}
+	else
+	{
+		while(w->next!=NULL)
+		{
+			if(w->exp==tmp->exp)
+			{
+				tmp->c+=w->c;//added to first list;
+			}
+			if(tmp->next==NULL)
+			{
+				w=w->next;//if check of one exp is over then next terms is checked
+				tmp=t;//the second expresion is pointed again to 1st term
+			}
+			else
+				tmp=tmp->next;
+		}
+	return tmp;
+	}
+}	
+
+void main()
+{
+	int n1,n2;
+	struct node *temp=(struct node*)malloc(sizeof(struct node));
+	struct node *t=(struct node*)malloc(sizeof(struct node));
+	struct node *result=(struct node*)malloc(sizeof(struct node));
+	printf("Enter the number of terms in 1st exprerssion::");
+	scanf("%d",&n1);
+	printf("\n\tFIRST EXPRESSION\n\n");
+	for(int i=0;i<n1;i++)
+	{
+		printf("Enter the coefficent::");
+		scanf("%d",&temp->c);
+		printf("Enter the exponential part");
+		scanf("%d",&temp->exp);
+		temp=temp->next;
+	}
+	temp->next=NULL;
+	printf("Enter the number of terms in 2nd expression");	
+	scanf("%d",&n2);
+	printf("\n\tSECOND EXPRESSION\n\n");
+	for(int i=0;i<n2;i++)
+	{
+		printf("Enter the coefficent::");
+		scanf("%d",&t->c);
+		printf("Enter the exponential part");
+		scanf("%d",&t->exp);
+		t=t->next;
+	}
+	t->next=NULL;
+	result=polyadd(temp,t,n1,n2);
+	while(result->next!=NULL)
+	{
+		printf("%d^%d",result->c,result->exp);
+		result=result->next;
+	}		
+}
