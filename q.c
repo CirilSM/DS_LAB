@@ -1,402 +1,253 @@
-#include<stdio.h>
-int ch,cho,l[20],c[20],d[20],nl,nc,nd=-1,fl=-1,fc=-1,fd=-1,rl=-1,rc=-1,rd=-1;
-void lqi()
+//Prog to implement linear q, circuler q and deque using array.
+#include<stdio.h> 
+#include<stdlib.h>
+int front1=-1,front2=0,front3=0,rear1=-1,rear2=0,rear3=0,q[100],n1,cq1[100],n2,dq1[100],n3,item;
+void lq();
+void dq();
+void cq();
+void enq();
+void deq();
+void cenq();
+void cdeq();
+void denq_end();
+void ddeq_beg();
+void denq_beg();
+void ddeq_end();
+void main()
 {
-	int x;
-    	if(rl==nl-1)
-        	printf("Linear Queue full\n");
-    	else
-    	{
-		printf("Enter the element\n");
-        	scanf("%d",&x);
-        	if(fl==-1)
-        	{
-            		fl=0;
-            		rl=0;
-            		l[rl]=x;
-        	}
-        	else
-        	{
-            		rl++;
-            		l[rl]=x;
-        	}
-    	}
-}
-void lqd()
-{
-	int s;
-    	s=l[fl];
-    	if(fl==-1)
-        	printf("Linear Queue empty\n");
-    	else
-    	{
-		if(fl==rl)
-        	{
-           	 	fl=-1;
-            		rl=-1;
-        	}
-        	else
-            		fl++;
-        	printf("Deleted %d\n",s);
-    	}
-}
-void lqdi()
-{
-   	int i;
-    	if(fl==-1)
-        	printf("Linear Queue is empty\n");
-    	else
-    	{
-		for(i=fl;i<=rl;i++)
-			printf("%d\n",l[i]);
-    	}
-}
-void cqi()
-{
-	int x;
-   	if((fc==0&&rc==nc-1)||(fc==rc+1))
-        	printf("Circular Queue full\n");
-   	else
-   	{
-		printf("Enter the element\n");
-       		scanf("%d",&x);
-       		if(fc==-1)
-       		{
-           		fc=0;
-           		rc=0;
-           		c[rc]=x;
-       		}
-       		else
-       		{
-           		rc++;
-           		c[rc]=x;
-       		}
-   	}
-}
-void cqd()
-{
-	int s;
-    	if(fc==-1)
-        	printf("Circular Queue is empty\n");
-    	else
-    	{
-		s=c[fc];
-        	if(fc==rc)
-        	{
-            		fc=-1;
-            		rc=-1;
-        	}
-        	else if(fc==nc-1)
-            		fc=0;
-        	else
-            		fc++;
-        	printf("Deleted %d\n",s);
-    	}
-}
-void cqdi()
-{
-	int i;
-    	if(fc==-1)
-        	printf("Circular Queue is empty\n");
-    	else
-    	{
-		if(fc<=rc)
-        	{
-			for(i=fc;i<=rc;i++)
-            			printf("%d",c[i]);
-       	 	}
-        	else
-        	{
-            		for(i=fc;i<=nc-1;i++)
-            		{
-				printf("%d",c[i]);
-                		printf("\n");
-            		}
-        	}
-    	}
-}
-void dqif()
-{
-	int x;
-    	if((fd==0&&rd==nd-1)||(fd==rd+1))
-        	printf("Double Ended Queue full\n");
-    	else
-    	{
-		printf("Enter the element\n");
-       		scanf("%d",&x);
-       		if(fd==-1)
-       		{
-           		fd=0;
-           		rd=0;
-           		d[fd]=x;
-       		}
-       		else if(fd==0)
-       		{
-			fd=nd-1;
-            		d[fd]=x;
-       		}
-       		else
-       		{
-			fd--;
-            		d[fd]=x;
-       		}
-   	}
-}
-void dqir()
-{
-	int x;
-   	if((fd==0&&rd==nd-1)||(fd==rd+1))
-        	printf("Circular Queue full\n");
-   	else
-   	{
-		printf("Enter the element\n");
-       		scanf("%d",&x);
-       		if(fd==-1)
-       		{
-           		fd=0;
-           		rd=0;
-           		d[rd]=x;
-       		}
-       		else if(rd==nd-1)
-       		{
-           		rd=0;
-           		d[rd]=x;
-       		}
-       		else
-       		{
-           		rd++;
-           		d[rd]=x;
-       		}
-   	}
-}
-void dqdf()
-{
-    	int s;
-    	if(fd==-1)
-        	printf("Double ended Queue is empty\n");
-   	else
-    	{
-		s=d[fd];
-        	if(fd==rd)
-        	{
-            		fd=-1;
-            		rd=-1;
-        	}
-        	else if(fd==nd-1)
-            		fd=0;
-        	else
-            		fd++;
-        	printf("Deleted %d\n",s);
-    	}
-}
-void dqdr()
-{
-    	if(fd==-1&&rd==-1)
-        	printf("Double Ended Queue empty");
-    	else
-    	{
-        	int s;
-        	s=d[rd];
-        	if(fd==rd)
-        	{
-            		fd=-1;
-            		rd=-1;
-        	}
-        	else if(rd==0)
-            		rd=nd-1;
-        	else
-            		rd--;
-        	printf("Deleted %d\n",s);
-    	}
-}
-void dqdi()
-{
-    	int i;
-    	if(fd==-1)
-        	printf("Double Ended Queue is empty\n");
-    	else
-    	{
-		if(fd<=rd)
-			for(i=fd;i<=rd;i++)
-				printf("%d\n",d[i]);
-        	else if(fd>=rd)
-        	{
-			for(i=rd;i>=0;i--)
-          			printf("%d\n",d[i]);
-         		for(i=fd;i<=nd-1;i++)
-         			printf("%d\n",d[i]);
-        	}
-        	else
-            	for(i=0;i<=nd-1;i++)
-               		printf("%d",d[i]);
-    	}
-}
-void dq()
-{
-    	int z,l;
-	if(nd==-1)
+	int ch,ch1,ch2;
+	printf("Enter the size of the LQueue:");
+	scanf("%d",&n1);
+	printf("Enter the size of the CQueue:");
+	scanf("%d",&n2);
+	printf("Enter the size of the DQueue:");
+	scanf("%d",&n3);
+	while(1)
 	{
-    		printf("Enter the size\n");
-    		scanf("%d",&nd);
-	}
-	printf("1.Insertion\n2.deletion\n3.display\n4.exit\n");
-       	printf("Enter your choice\n");
-       	scanf("%d",&z);
-       	switch(z)
-      	{
-      		case 1:
-       		{
-			printf("1.Insert at front\n2.Insert at rear\n");
-               		scanf("%d",&l);
-               		switch(l)
-               		{
-               			case 1:
-               			{
-                      			dqif();
-                       			break;
-              			}
-                 		case 2:
-                    		{
-                        		dqir();
-                        		break;
-                    		}
-               		}
-			dq();
-               		break;
-           	}
-            	case 2:
-            	{
-			int k;
-                	printf("1.Delete at front\n2.Delete at rear\n");
-                	scanf("%d",&k);
-                	switch(k)
-                	{
-                   		case 1:
-                   		{
-                        		dqdf();
-                        		break;
-                    		}
-                    		case 2:
-                    		{
-                        		dqdr();
-                        		break;
-                    		}
-                	}
-			dq();
-                	break;
-            	}
-            	case 3:
-            	{
-                	dqdi();
-			dq();
-                	break;
-            	}
-            	case 4:
-            	{
-			break;
-            	}
-            	default:
+		printf("1.Linear Queue\n2.Circular Queue\n3.Deque\n4.Exit\nEnter the choice:");
+		scanf("%d",&ch);
+		switch(ch)
 		{
-			printf("Invalid choice");
-			dq();
-        	}
+			case 1:	lq();
+				break;
+			case 2:	cq();
+				break;
+			case 3:	dq();
+				break;
+			case 4: exit(0);
+		}			
 	}
+}		
+void lq()
+{	
+	int ch, ch1;
+	do
+	{
+		printf("1.Insertion\n2.Deletion\n3.Display\nEnter your choice:");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1: enq();
+				break;
+			case 2: deq();
+				break;
+			case 3: printf("Linear Queue\n");
+				for(int i=front1; i<=rear1; i++)
+					printf("%d\n",q[i]);
+				break;
+		}
+		printf("\nEnter '0' to continue.");
+		scanf("%d",&ch1);
+	}while(ch1=='0');
 }
 void cq()
+{	
+	int ch,ch1;
+	do
+	{
+		printf("1.Insertion\n2.Deletion\n3.Display\nEnter your choice:");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1: cenq();
+				break;
+			case 2: cdeq();
+				break;
+			case 3: printf("Circular Queue\n");
+				for(int i=front2; i<=rear2; i++)
+					printf("%d\n",cq1[i]);
+				break;
+		}
+		printf("\nEnter '0' to continue.");
+		scanf("%d",&ch1);
+	}while(ch1=='0');
+}
+void dq()
+{	
+	int ch,ch1,ch2;
+	do
+	{
+		printf("\n1.Insertion at end\n2.Deletion at the front\n3.Insertion at the begining\n4.Deletion at the end\n5.Display from end\n6.Display from front.\nEnter the choice:");
+		scanf("%d",&ch2);
+		switch(ch2)
+		{
+			case 1: denq_end();
+				break;
+			case 2: ddeq_beg();
+				break;
+			case 5: printf("Deque\n");
+				for(int i=front3; i<=rear3; i++)
+					printf("%d\n",dq1[i]);
+				break;
+			case 6: printf("Deque\n");
+				for(int i=rear3; i>=front3; i--)
+					printf("%d\n",dq1[i]);
+				break;
+			case 3:	denq_beg();//insertion at the end
+				break;
+			case 4:	ddeq_end();//deletion at the end
+				break;
+		}
+		printf("\nEnter '0' to continue.");
+		scanf("%d",&ch1);
+	}while(ch1=='0');
+}
+void enq()
 {
-    int choi=0,z;
-    printf("Enter the size\n");
-    scanf("%d",&nc);
-    do
-    {   printf("1.Insertion\n2.deletion\n3.display\n4.exit\n");
-        printf("Enter your choice\n");
-        scanf("%d",&z);
-        switch(z)
-        {
-            case 1:
-            {
-                cqi();
-                break;
-            }
-            case 2:
-            {
-                cqd();
-                break;
-            }
-            case 3:
-            {
-                cqdi();
-                break;
-            }
-            case 4:
-            { choi++;
-            break;
-            }
-            default:printf("Invalid choice");
-        }
-    }while(choi==0);
+	printf("Enter the item to be inserted:");
+	scanf("%d",&item);
+	if(rear1==n1)
+	{
+		printf("Queue Full!!!!!!!");
+	}
+	else
+	{
+		if(front1==rear1==0)
+			front1=0;
+		rear1++;
+		q[rear1]=item;
+	}
 }
-void lq()
-{   int choi=0;
-    printf("Enter the size\n");
-    scanf("%d",&nl);
-    do
-    {   printf("1.Insertion\n2.deletion\n3.display\n4.exit\n");
-        printf("Enter your choice\n");
-        scanf("%d",&cho);
-        switch(cho)
-        {
-            case 1:
-            {
-                lqi();
-                break;
-            }
-            case 2:
-            {
-                lqd();
-                break;
-            }
-            case 3:
-            {
-                lqdi();
-                break;
-            }
-	case 4:
-            { choi++;
-      	      break;
-            }
-            default:printf("Invalid choice\n");
-        }
-    }while(choi==0);
+void deq()
+{
+	if(rear1==front1==-1)
+		printf("Queue Empty!");
+	else
+	{
+		item=q[front1];
+		if(front1==rear1)
+		{
+			front1=0;
+			rear1=0;
+		}
+		front1++;
+	}
+	printf("Deleted item is %d",item);
 }
-void main()
-{   int d;
-    do
-   {    printf("1.Linear Queue\n2.Circular Queue\n3.Double Ended Queue\n");
-        printf("Enter your choice\n");
-        scanf("%d",&ch);
-        switch(ch)
-        {
-            case 1:
-            {
-                lq();
-                break;
-            }
-            case 2:
-            {
-                cq();
-                break;
-            }
-            case 3:
-            {
-                dq();
-                break;
-            }
-            default:printf("Invalid choice");
-        }
-        printf("Do you want to continue? if yes type 1\n");
-        scanf("%d",&d);
-   }while(d==1);
+void cenq()
+{
+	printf("Enter the item:");
+	scanf("%d",&item);
+	if(front2==(rear2%n2)+1)		
+		printf("Queue full!");
+	else
+	{
+		if(front2==0 && rear2==0)
+			front2=1;
+		rear2=(rear2%n2)+1;
+		cq1[rear2]=item;
+	}
 }
-
-
+void cdeq()
+{
+	int temp;
+	if(front2==0 && rear2==0)
+		printf("Queue empty!");
+	else
+	{
+		temp=cq1[front2];
+		if(front2==rear2)
+		{
+			front2=0;
+			rear2=0;
+		}
+		else
+		{
+			front2=(front2%n2)+1;
+		}
+	}
+	printf("Deleted item is %d",item);
+}
+void denq_beg()
+{
+	printf("Enter the item:");
+	scanf("%d",&item);
+	if(front3==(rear3%n2)+1)
+		printf("Queue full!");
+	else
+	{
+		if(front3==0 &&rear3==0)
+		{
+			front3=1;
+			rear3=1;
+		}
+		else if(front3=1)
+			front3=n3;
+		else
+			front3--;
+		dq1[front3]=item;
+	}
+}
+void ddeq_end()
+{
+	if(front3==0)
+		printf("Queue empty!!");
+	else
+	{
+		item=dq1[rear3];
+		if(front3==rear3)
+		{
+			front3=0;
+			rear3=0;
+		}
+		else if(rear3==1)
+			rear3=n3;
+		else
+			rear3--;
+	}
+	printf("Deleted item is %d",item);
+}
+void denq_end()
+{
+	printf("Enter the item:");
+	scanf("%d",&item);
+	if(front3==(rear3%n3)+1)		
+		printf("Queue full!");
+	else
+	
+		if(front3==0 && rear3==0)
+			front3=1;
+		rear3=(rear3%n3)+1;
+		dq1[rear3]=item;
+	
+}
+void ddeq_beg()
+{
+	int temp;
+	if(front3==0 && rear3==0)
+		printf("Queue empty!");
+	else
+	{
+		temp=cq1[front3];
+		if(front3==rear3)
+		{
+			front3=0;
+			rear3=0;
+		}
+		else
+		{
+			front3=(front3%n3)+1;
+		}
+	}
+	printf("Deleted item is %d",item);
+}
